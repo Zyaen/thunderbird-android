@@ -25,6 +25,7 @@ class AccountSettingsDataStore(
 
     override fun getBoolean(key: String, defValue: Boolean): Boolean {
         return when (key) {
+            "reply_as_subaddressed" -> account.replyAsSubAddressed
             "mark_message_as_read_on_view" -> account.isMarkMessageAsReadOnView
             "mark_message_as_read_on_delete" -> account.isMarkMessageAsReadOnDelete
             "account_sync_remote_deletetions" -> account.isSyncRemoteDeletions
@@ -50,6 +51,7 @@ class AccountSettingsDataStore(
 
     override fun putBoolean(key: String, value: Boolean) {
         when (key) {
+            "reply_as_subaddressed" -> account.replyAsSubAddressed = value
             "mark_message_as_read_on_view" -> account.isMarkMessageAsReadOnView = value
             "mark_message_as_read_on_delete" -> account.isMarkMessageAsReadOnDelete = value
             "account_sync_remote_deletetions" -> account.isSyncRemoteDeletions = value
@@ -109,6 +111,7 @@ class AccountSettingsDataStore(
 
     override fun getString(key: String, defValue: String?): String? {
         return when (key) {
+            "recipient_delimiter" -> account.outgoingServerSettings.getRecipientDelimiter()
             "account_description" -> account.name
             "show_pictures_enum" -> account.showPictures.name
             "account_display_count" -> account.displayCount.toString()
@@ -142,6 +145,7 @@ class AccountSettingsDataStore(
         if (value == null) return
 
         when (key) {
+            "recipient_delimiter" -> account.outgoingServerSettings = account.outgoingServerSettings.newRecipientDelimiter(value)
             "account_description" -> account.name = value
             "show_pictures_enum" -> account.showPictures = Account.ShowPictures.valueOf(value)
             "account_display_count" -> account.displayCount = value.toInt()

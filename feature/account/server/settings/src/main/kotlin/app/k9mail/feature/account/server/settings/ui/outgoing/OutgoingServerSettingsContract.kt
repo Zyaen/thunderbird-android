@@ -21,6 +21,7 @@ interface OutgoingServerSettingsContract {
         val username: StringInputField = StringInputField(),
         val password: StringInputField = StringInputField(),
         val clientCertificateAlias: String? = null,
+        val recipientDelimiter: StringInputField = StringInputField(),
     )
 
     sealed interface Event {
@@ -31,6 +32,7 @@ interface OutgoingServerSettingsContract {
         data class UsernameChanged(val username: String) : Event
         data class PasswordChanged(val password: String) : Event
         data class ClientCertificateChanged(val clientCertificateAlias: String?) : Event
+        data class RecipientDelimiterChanged(val recipientDelimiter: String) : Event
 
         data object LoadAccountState : Event
 

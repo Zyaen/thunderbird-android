@@ -193,6 +193,12 @@
             android:title="@string/account_settings_message_read_receipt_label"
             />
 
+        <CheckBoxPreference
+        android:key="reply_as_subaddressed"
+        android:summary="@string/account_settings_message_read_receipt_summary"
+        android:title="@string/account_settings_reply_as_subaddressed_label"
+        />
+
         <ListPreference
             android:entries="@array/quote_style_entries"
             android:entryValues="@array/quote_style_values"

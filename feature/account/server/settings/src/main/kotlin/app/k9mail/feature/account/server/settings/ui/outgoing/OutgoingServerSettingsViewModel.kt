@@ -32,6 +32,9 @@ open class OutgoingServerSettingsViewModel(
             is Event.ClientCertificateChanged -> updateState {
                 it.copy(clientCertificateAlias = event.clientCertificateAlias)
             }
+            is Event.RecipientDelimiterChanged -> {
+                updateState { it.copy(recipientDelimiter = it.recipientDelimiter.updateValue(event.recipientDelimiter)) }
+            }
 
             Event.OnNextClicked -> onNext()
             Event.OnBackClicked -> onBack()
@@ -80,7 +83,7 @@ open class OutgoingServerSettingsViewModel(
         }
 
         if (!hasError) {
-            accountStateRepository.setOutgoingServerSettings(state.value.toServerSettings())
+            accountStateRepository.setOutgoingServerSettings(state.value.toServerSettings().newRecipientDelimiter(recipientDelimiter.value))
             navigateNext()
         }
     }

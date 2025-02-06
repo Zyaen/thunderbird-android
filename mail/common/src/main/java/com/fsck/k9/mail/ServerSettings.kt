@@ -35,6 +35,16 @@ data class ServerSettings @JvmOverloads constructor(
         return this.copy(authenticationType = authType)
     }
 
+    fun newRecipientDelimiter(delimiter: String): ServerSettings {
+        val newExtra = extra.toMutableMap()
+        newExtra["recipientDelimiter"] = delimiter.trim().takeIf { it.isNotBlank() }
+        return this.copy(extra = newExtra)
+    }
+
+    fun getRecipientDelimiter(): String {
+        return extra["recipientDelimiter"] ?: "+"
+    }
+
     companion object {
         private val LINE_BREAK = "[\\r\\n]".toRegex()
     }
