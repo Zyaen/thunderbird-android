@@ -39,6 +39,7 @@ private fun ServerSettings.toOutgoingServerSettingsState(password: String): Stat
         username = StringInputField(value = username),
         password = StringInputField(value = password),
         clientCertificateAlias = clientCertificateAlias,
+        recipientDelimiter = StringInputField(value = getRecipientDelimiter()),
     )
 }
 

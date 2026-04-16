@@ -79,6 +79,7 @@ internal class DefaultLegacyAccountDataMapper : LegacyAccountDataMapper {
             isDefaultQuotedTextShown = dto.isDefaultQuotedTextShown,
             isReplyAfterQuote = dto.isReplyAfterQuote,
             isStripSignature = dto.isStripSignature,
+            replyAsSubAddressed = dto.replyAsSubAddressed,
             isSyncRemoteDeletions = dto.isSyncRemoteDeletions,
             openPgpProvider = dto.openPgpProvider,
             openPgpKey = dto.openPgpKey,
@@ -185,6 +186,7 @@ internal class DefaultLegacyAccountDataMapper : LegacyAccountDataMapper {
             isDefaultQuotedTextShown = domain.isDefaultQuotedTextShown
             isReplyAfterQuote = domain.isReplyAfterQuote
             isStripSignature = domain.isStripSignature
+            replyAsSubAddressed = domain.replyAsSubAddressed
             isSyncRemoteDeletions = domain.isSyncRemoteDeletions
             openPgpProvider = domain.openPgpProvider
             openPgpKey = domain.openPgpKey

@@ -119,6 +119,18 @@ internal fun LazyListScope.outgoingFormItems(
     }
 
     item {
+        TextInput(
+            text = state.recipientDelimiter.value,
+            errorMessage = state.recipientDelimiter.error?.toResourceString(resources),
+            onTextChange = { onEvent(Event.RecipientDelimiterChanged(it)) },
+            label = stringResource(id = R.string.account_server_settings_recipient_delimiter_label),
+            isRequired = false,
+            contentPadding = defaultItemPadding(),
+            keyboardOptions = KeyboardOptions(autoCorrectEnabled = false),
+        )
+    }
+
+    item {
         Spacer(modifier = Modifier.requiredHeight(MainTheme.sizes.smaller))
     }
 }

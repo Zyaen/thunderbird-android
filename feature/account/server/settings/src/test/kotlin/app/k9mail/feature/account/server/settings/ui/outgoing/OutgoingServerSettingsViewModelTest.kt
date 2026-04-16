@@ -85,6 +85,7 @@ class OutgoingServerSettingsViewModelTest {
                     authenticationType = AuthenticationType.PasswordCleartext,
                     username = StringInputField(value = "username"),
                     password = StringInputField(value = "password"),
+                    recipientDelimiter = StringInputField(value = "+"),
                 ),
             )
         }
@@ -164,6 +165,16 @@ class OutgoingServerSettingsViewModelTest {
     }
 
     @Test
+    fun `should change state when RecipientDelimiterChanged event is received`() = runMviTest {
+        eventStateTest(
+            viewModel = createTestSubject(State()),
+            initialState = State(),
+            event = Event.RecipientDelimiterChanged("-"),
+            expectedState = State(recipientDelimiter = StringInputField(value = "-")),
+        )
+    }
+
+    @Test
     fun `should save state and emit effect NavigateNext when OnNextClicked is received and input valid`() = runMviTest {
         val initialState = State()
         val repository = InMemoryAccountStateRepository()
@@ -182,6 +193,7 @@ class OutgoingServerSettingsViewModelTest {
                 authenticationType = AuthenticationType.PasswordCleartext,
                 username = StringInputField(value = "", isValid = true),
                 password = StringInputField(value = "", isValid = true),
+                recipientDelimiter = StringInputField(value = "", isValid = false),
             ),
         )
 
@@ -196,7 +208,7 @@ class OutgoingServerSettingsViewModelTest {
                     username = "",
                     password = "",
                     clientCertificateAlias = null,
-                    extra = emptyMap(),
+                    extra = mapOf("recipientDelimiter" to "+"),
                 ),
             ),
         )
@@ -231,6 +243,7 @@ class OutgoingServerSettingsViewModelTest {
                     authenticationType = AuthenticationType.OAuth2,
                     username = StringInputField(value = "", isValid = true),
                     password = StringInputField(value = "", isValid = true),
+                    recipientDelimiter = StringInputField(value = "", isValid = false),
                 ),
             )
 
@@ -245,7 +258,7 @@ class OutgoingServerSettingsViewModelTest {
                         username = "",
                         password = null,
                         clientCertificateAlias = null,
-                        extra = emptyMap(),
+                        extra = mapOf("recipientDelimiter" to "+"),
                     ),
                 ),
             )
@@ -282,6 +295,7 @@ class OutgoingServerSettingsViewModelTest {
                         port = NumberInputField(value = 465L, isValid = true),
                         username = StringInputField(value = "", isValid = true),
                         password = StringInputField(value = "", isValid = true),
+                        recipientDelimiter = StringInputField(value = "", isValid = false),
                     ),
                 )
             }
