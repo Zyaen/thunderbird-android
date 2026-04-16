@@ -1,3 +1,9 @@
+## Local Differences from Upstream
+
+A few local tweaks/features are documented here
+
+- `Subaddressed replies` (keeps the exact recipient address; delimiter defaults to `+`): `local-differences/subaddressed-replies.md`
+
 # Thunderbird for Android
 
 <a href="https://play.google.com/store/apps/details?id=net.thunderbird.android&referrer=utm_campaign%3Dandroid_metadata%26utm_medium%3Dweb%26utm_source%3Dgithub.com%26utm_content%3Dbadge" target="_blank"><img src="./docs/assets/get-it-on-play.png" alt="Get it on Google Play" height="28"></a>
