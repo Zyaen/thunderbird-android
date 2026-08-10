@@ -39,6 +39,7 @@ private fun ServerSettings.toOutgoingServerSettingsState(password: String): Stat
         username = StringInputField(value = username),
         password = StringInputField(value = password),
         clientCertificateAlias = clientCertificateAlias,
+        recipientDelimiter = StringInputField(value = getRecipientDelimiter()),
     )
 }
 
@@ -52,5 +53,5 @@ internal fun State.toServerSettings(): ServerSettings {
         username = if (authenticationType.isUsernameRequired) username.value.trim() else "",
         password = if (authenticationType.isPasswordRequired) password.value.trim() else null,
         clientCertificateAlias = clientCertificateAlias,
-    )
+    ).newRecipientDelimiter(recipientDelimiter.value)
 }

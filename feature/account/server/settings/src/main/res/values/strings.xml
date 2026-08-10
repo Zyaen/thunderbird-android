@@ -6,6 +6,7 @@
     <string name="account_server_settings_port_label">Port</string>
     <string name="account_server_settings_authentication_label">Authentication</string>
     <string name="account_server_settings_username_label">Username</string>
+    <string name="account_server_settings_recipient_delimiter_label">Recipient delimiter</string>
 
     <string name="account_server_settings_connection_security_none">None</string>
     <string name="account_server_settings_connection_security_start_tls">StartTLS</string>

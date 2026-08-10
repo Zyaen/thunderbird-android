@@ -76,6 +76,10 @@ open class LegacyAccountDto(
 
     @get:Synchronized
     @set:Synchronized
+    var replyAsSubAddressed = false
+
+    @get:Synchronized
+    @set:Synchronized
     private var internalIncomingServerSettings: ServerSettings? = null
 
     @get:Synchronized
@@ -548,9 +552,35 @@ open class LegacyAccountDto(
 
     @Synchronized
     fun findIdentity(address: Address): Identity? {
-        return identities.find { identity ->
+        val exactMatch = identities.find { identity ->
             identity.email.equals(address.address, ignoreCase = true)
         }
+        if (exactMatch != null) {
+            return exactMatch
+        }
+
+        val baseEmail = getSubAddressedBaseEmail(address) ?: return null
+        return identities.find { identity ->
+            identity.email.equals(baseEmail, ignoreCase = true)
+        }?.let { identity ->
+            if (replyAsSubAddressed) {
+                identity.copy(email = address.address)
+            } else {
+                identity
+            }
+        }
+    }
+
+    private fun getSubAddressedBaseEmail(address: Address): String? {
+        val hostname = address.hostname?.takeIf { it.isNotBlank() } ?: return null
+        val atIndex = address.address.lastIndexOf('@')
+        if (atIndex <= 0) return null
+        val localPart = address.address.substring(0, atIndex)
+        val delimiter = outgoingServerSettings.getRecipientDelimiter()
+        if (delimiter.isEmpty() || !localPart.contains(delimiter)) return null
+        val baseLocalPart = localPart.substringBefore(delimiter)
+        if (baseLocalPart.isEmpty()) return null
+        return "$baseLocalPart@$hostname"
     }
 
     @Suppress("MagicNumber")

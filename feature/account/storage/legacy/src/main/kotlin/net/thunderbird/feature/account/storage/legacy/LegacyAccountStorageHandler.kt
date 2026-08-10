@@ -172,6 +172,7 @@ class LegacyAccountStorageHandler(
                 keyGen.create("stripSignature"),
                 AccountDefaultsProvider.Companion.DEFAULT_STRIP_SIGNATURE,
             )
+            replyAsSubAddressed = storage.getBoolean(keyGen.create("replyAsSubAddressed"), false)
             useCompression = storage.getBoolean(keyGen.create("useCompression"), true)
             isSendClientInfoEnabled = storage.getBoolean(keyGen.create("sendClientInfo"), true)
 
@@ -390,6 +391,7 @@ class LegacyAccountStorageHandler(
             editor.putBoolean(keyGen.create("defaultQuotedTextShown"), isDefaultQuotedTextShown)
             editor.putBoolean(keyGen.create("replyAfterQuote"), isReplyAfterQuote)
             editor.putBoolean(keyGen.create("stripSignature"), isStripSignature)
+            editor.putBoolean(keyGen.create("replyAsSubAddressed"), replyAsSubAddressed)
             editor.putLong(keyGen.create("cryptoKey"), openPgpKey)
             editor.putBoolean(keyGen.create("openPgpHideSignOnly"), isOpenPgpHideSignOnly)
             editor.putBoolean(keyGen.create("openPgpEncryptSubject"), isOpenPgpEncryptSubject)
@@ -500,6 +502,7 @@ class LegacyAccountStorageHandler(
         editor.remove(keyGen.create("showPicturesEnum"))
         editor.remove(keyGen.create("replyAfterQuote"))
         editor.remove(keyGen.create("stripSignature"))
+        editor.remove(keyGen.create("replyAsSubAddressed"))
         editor.remove(keyGen.create("cryptoApp")) // this is no longer set, but cleans up legacy values
         editor.remove(keyGen.create("cryptoAutoSignature"))
         editor.remove(keyGen.create("cryptoAutoEncrypt"))

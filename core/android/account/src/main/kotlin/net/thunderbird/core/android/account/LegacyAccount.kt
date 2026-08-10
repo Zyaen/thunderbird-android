@@ -84,6 +84,7 @@ data class LegacyAccount(
     val isDefaultQuotedTextShown: Boolean = false,
     val isReplyAfterQuote: Boolean = false,
     val isStripSignature: Boolean = false,
+    val replyAsSubAddressed: Boolean = false,
     val isSyncRemoteDeletions: Boolean = false,
     val openPgpProvider: String? = null,
     val openPgpKey: Long = 0,

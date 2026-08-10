@@ -31,6 +31,7 @@ class OutgoingServerSettingsStateMapperKtTest {
             State(
                 username = StringInputField(value = email),
                 server = StringInputField(value = email.toInvalidEmailDomain()),
+                recipientDelimiter = StringInputField(value = "+"),
             ),
         )
     }
@@ -52,6 +53,7 @@ class OutgoingServerSettingsStateMapperKtTest {
                 username = StringInputField(value = email),
                 password = StringInputField(value = INCOMING_SERVER_PASSWORD),
                 server = StringInputField(value = email.toInvalidEmailDomain()),
+                recipientDelimiter = StringInputField(value = "+"),
             ),
         )
     }
@@ -108,7 +110,7 @@ class OutgoingServerSettingsStateMapperKtTest {
 
         val result = outgoingState.toServerSettings()
 
-        assertThat(result).isEqualTo(SMTP_SERVER_SETTINGS)
+        assertThat(result).isEqualTo(SMTP_SERVER_SETTINGS.newRecipientDelimiter("+"))
     }
 
     private companion object {
@@ -120,6 +122,7 @@ class OutgoingServerSettingsStateMapperKtTest {
             username = StringInputField(value = "user"),
             password = StringInputField(value = "password"),
             clientCertificateAlias = null,
+            recipientDelimiter = StringInputField(value = "+"),
         )
 
         private val SMTP_SERVER_SETTINGS = ServerSettings(

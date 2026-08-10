@@ -38,6 +38,9 @@ open class OutgoingServerSettingsViewModel(
             is Event.ClientCertificateChanged -> updateState {
                 it.copy(clientCertificateAlias = event.clientCertificateAlias)
             }
+            is Event.RecipientDelimiterChanged -> updateState {
+                it.copy(recipientDelimiter = it.recipientDelimiter.updateValue(event.recipientDelimiter))
+            }
 
             Event.OnNextClicked -> onNext()
 
